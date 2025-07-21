@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Pedido Enviado!</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"><!-- Bootstrap CSS -->
     <style>
         body {
             background-color: #f8f9fa;
@@ -24,7 +23,7 @@
             color: #28a745;
             margin-bottom: 20px;
         }
-        .bank-info {
+        .order-summary {
             background-color: #f1f8ff;
             border-radius: 8px;
             padding: 20px;
@@ -38,6 +37,13 @@
             border-radius: 5px;
             margin-right: 10px;
         }
+        .bank-details {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-top: 15px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -45,41 +51,125 @@
         <div class="success-container">
             <div class="success-icon">✓</div>
             <h1 class="mb-3">¡Pedido realizado con éxito!</h1>
-            <p class="lead">Gracias por tu compra. Nos contactaremos contigo para confirmar los detalles de tu pedido.</p>
+            <p class="lead">Gracias por tu compra. Hemos recibido tu pedido correctamente.</p>
             
-            <div class="bank-info">
-                <h4 class="mb-3">Datos bancarios para transferencia:</h4>
-                <ul class="list-unstyled">
-                    <li><strong>Banco:</strong> BBVA</li>
-                    <li><strong>Nombre:</strong> Tamales</li>
-                    <li><strong>CLABE:</strong> 0123 4567 8910 1112</li>
-                    <li><strong>Tarjeta:</strong> 4152 3134 5678 9012</li>
-                </ul>
+            
+            <div id="cliente-info" class="mb-4 text-start"></div><!-- Datos del cliente -->
+            
+            
+            <div class="order-summary"><!-- Resumen del pedido -->
+                <h4 class="mb-3">Resumen de tu pedido:</h4>
+                <ul id="lista-pedido" class="list-unstyled mb-0"></ul>
+                <hr>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Total:</h5>
+                    <h4 class="mb-0 text-success" id="total-pedido"></h4>
+                </div>
                 
-                <div class="mt-3">
-                    <h5>Nuestros Tamales</h5>
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="https://via.placeholder.com/150?text=Tamal+Rojo" alt="Tamal Rojo" class="product-img">
-                        <span>Tamal de Salsa Roja - $26</span>
-                    </div>
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="https://via.placeholder.com/150?text=Tamal+Verde" alt="Tamal Verde" class="product-img">
-                        <span>Tamal de Salsa Verde - $26</span>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <img src="https://via.placeholder.com/150?text=Tamal+Kool" alt="Tamal Kool" class="product-img">
-                        <span>Tamal de Salsa Kool - $27</span>
-                    </div>
+                
+                <div id="bank-details" class="bank-details mt-3"><!-- Info bancaria-->
+                    <h5 class="mb-2">Datos para transferencia:</h5>
+                    <ul class="list-unstyled small">
+                        <li><strong>Banco:</strong> BBVA</li>
+                        <li><strong>Nombre:</strong> Tamales Doña Maria</li>
+                        <li><strong>CLABE:</strong> 0123 4567 8910 1112</li>
+                        <li><strong>Tarjeta:</strong> 4152 3134 5678 9012</li>
+                    </ul>
+                    <p class="small text-muted mt-2 mb-0">Por favor envía tu comprobante al WhatsApp: 55-1234-5678</p>
                 </div>
             </div>
             
-            <p>Si tienes alguna duda, contáctanos al: <strong>55-1234-5678</strong></p>
-            
-            <a href="https://tusuario.github.io/pedidos-tamales/" class="btn btn-primary mt-3">Volver al inicio</a>
+            <p class="mt-4">Nos contactaremos contigo para confirmar los detalles de entrega.</p>
+            <a href="index.html" class="btn btn-primary mt-3">Hacer otro pedido</a>
         </div>
     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener los parámetros de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const pedidoStr = urlParams.get('pedido');
+            
+            if (pedidoStr) {
+                try {
+                    const pedido = JSON.parse(decodeURIComponent(pedidoStr));
+                    
+                    // Mostrar información del cliente
+                    document.getElementById('cliente-info').innerHTML = `
+                        <p><strong>Nombre:</strong> ${pedido.nombre}</p>
+                        <p><strong>Teléfono:</strong> ${pedido.telefono}</p>
+                        <p><strong>Método de pago:</strong> ${pedido.metodoPago === 'transferencia' ? 'Transferencia bancaria' : 'Efectivo al recibir'}</p>
+                    `;
+                    
+                    // Mostrar productos pedidos
+                    const listaPedido = document.getElementById('lista-pedido');
+                    let htmlProductos = '';
+                    
+                    // Tamal Rojo
+                    if (pedido.productos.rojo > 0) {
+                        htmlProductos += `
+                            <li class="d-flex align-items-center mb-3">
+                                <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" class="product-img">
+                                <div>
+                                    <div>${pedido.productos.rojo} x Tamal de Salsa Roja</div>
+                                    <small class="text-muted">$${pedido.productos.rojo * 26}</small>
+                                </div>
+                            </li>
+                        `;
+                    }
+                    
+                    // Tamal Verde
+                    if (pedido.productos.verde > 0) {
+                        htmlProductos += `
+                            <li class="d-flex align-items-center mb-3">
+                                <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" class="product-img">
+                                <div>
+                                    <div>${pedido.productos.verde} x Tamal de Salsa Verde</div>
+                                    <small class="text-muted">$${pedido.productos.verde * 26}</small>
+                                </div>
+                            </li>
+                        `;
+                    }
+                    
+                    // Tamal Kool
+                    if (pedido.productos.kool > 0) {
+                        htmlProductos += `
+                            <li class="d-flex align-items-center mb-3">
+                                <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" class="product-img">
+                                <div>
+                                    <div>${pedido.productos.kool} x Tamal de Salsa Kool</div>
+                                    <small class="text-muted">$${pedido.productos.kool * 27}</small>
+                                </div>
+                            </li>
+                        `;
+                    }
+                    
+                    listaPedido.innerHTML = htmlProductos;
+                    document.getElementById('total-pedido').textContent = `$${pedido.total}`;
+                    
+                    // Mostrar datos bancarios si es transferencia
+                    if (pedido.metodoPago === 'transferencia') {
+                        document.getElementById('bank-details').style.display = 'block';
+                    }
+                    
+                } catch (e) {
+                    console.error('Error al procesar el pedido:', e);
+                    document.getElementById('cliente-info').innerHTML = `
+                        <div class="alert alert-warning">
+                            No pudimos cargar los detalles de tu pedido. Por favor contáctanos directamente.
+                        </div>
+                    `;
+                }
+            } else {
+                document.getElementById('cliente-info').innerHTML = `
+                    <div class="alert alert-warning">
+                        No se recibieron datos del pedido. Por favor contáctanos directamente.
+                    </div>
+                `;
+            }
+        });
+    </script>
 </body>
 </html>
