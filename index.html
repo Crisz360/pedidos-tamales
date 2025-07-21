@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Tamales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #d35400;
+            text-align: center;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #d35400;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+    <h1>¡Ordena Tus Tamales!</h1>
+    <form action="https://formsubmit.co/tu-email@gmail.com" method="POST">
+        <input type="text" name="nombre" placeholder="Nombre completo" required>
+        <input type="tel" name="telefono" placeholder="Teléfono" required>
+        <input type="email" name="email" placeholder="Email (opcional)">
+        
+        <select name="tipo-tamal" required>
+            <option value="" disabled selected>Elige el tipo de tamal</option>
+            <option value="verde">Tamal verde</option>
+            <option value="mole">Tamal de mole</option>
+            <option value="dulce">Tamal de salsa kool</option>
+        </select>
+        
+        <input type="number" name="cantidad" placeholder="Cantidad" min="1" required>
+        <textarea name="direccion" placeholder="Dirección de entrega" required></textarea>
+        <textarea name="comentarios" placeholder="Comentarios extras (ej: sin cilantro)"></textarea>
+        
+        <input type="hidden" name="_next" value="https://tusuario.github.io/pedidos-tamales/gracias.html">
+        <input type="hidden" name="_captcha" value="false">
+        
+        <button type="submit">Enviar Pedido</button>
+    </form>
+</body>
+</html>
