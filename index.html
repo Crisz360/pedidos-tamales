@@ -4,33 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedido de Tamales</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"> <!-- Toastr CSS (para notificaciones) -->
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
+            background: #f5f5f5;
             padding: 20px;
-            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         h1 {
             color: #d35400;
             text-align: center;
         }
-        form {
-            background: white;
-            padding: 20px;
+        .product-card {
+            border: 1px solid #ddd;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .product-info {
+            flex: 1;
+        }
+        .product-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .product-price {
+            color: #d35400;
+            font-size: 18px;
+        }
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+        .quantity-btn {
+            background: #d35400;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .quantity {
+            margin: 0 10px;
+            font-size: 18px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
         input, select, textarea {
             width: 100%;
             padding: 10px;
-            margin: 8px 0;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
-        button {
-            background-color: #d35400;
+        .payment-method {
+            margin: 20px 0;
+        }
+        .payment-option {
+            margin-right: 15px;
+        }
+        button[type="submit"] {
+            background: #d35400;
             color: white;
             padding: 12px;
             border: none;
@@ -39,33 +91,164 @@
             width: 100%;
             font-size: 16px;
         }
-        button:hover {
-            background-color: #e67e22;
+        button[type="submit"]:hover {
+            background: #e67e22;
         }
     </style>
 </head>
 <body>
-    <h1>¡Ordena Tus Tamales!</h1>
-    <form action="https://formsubmit.co/tu-email@gmail.com" method="POST">
-        <input type="text" name="nombre" placeholder="Nombre completo" required>
-        <input type="tel" name="telefono" placeholder="Teléfono" required>
-        <input type="email" name="email" placeholder="Email (opcional)">
+    <div class="container">
+        <h1>¡Ordena Tus Tamales!</h1>
+        <form id="pedidoForm" action="https://formsubmit.co/tu-email@gmail.com" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_next" value="https://tusuario.github.io/pedidos-tamales/enviado.html">
+            <input type="hidden" name="_captcha" value="false">
+            
+            <div class="product-card"> <!-- Productos -->
+                <div class="product-info">
+                    <div class="product-name">Tamal de Salsa Roja</div>
+                    <div class="product-price">$18 c/u</div>
+                </div>
+                <div class="quantity-control">
+                    <button type="button" class="quantity-btn minus" data-product="tamal-mole">-</button>
+                    <span class="quantity" id="tamal-mole-qty">0</span>
+                    <button type="button" class="quantity-btn plus" data-product="tamal-mole">+</button>
+                    <input type="hidden" name="tamal-mole" id="tamal-mole" value="0">
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <div class="product-name">Tamal de Salsa Verde</div>
+                    <div class="product-price">$15 c/u</div>
+                </div>
+                <div class="quantity-control">
+                    <button type="button" class="quantity-btn minus" data-product="tamal-verde">-</button>
+                    <span class="quantity" id="tamal-verde-qty">0</span>
+                    <button type="button" class="quantity-btn plus" data-product="tamal-verde">+</button>
+                    <input type="hidden" name="tamal-verde" id="tamal-verde" value="0">
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <div class="product-name">Tamal de Salsa Kool</div>
+                    <div class="product-price">$15 c/u</div>
+                </div>
+                <div class="quantity-control">
+                    <button type="button" class="quantity-btn minus" data-product="tamal-kool">-</button>
+                    <span class="quantity" id="tamal-kool-qty">0</span>
+                    <button type="button" class="quantity-btn plus" data-product="tamal-kool">+</button>
+                    <input type="hidden" name="tamal-kool" id="tamal-kool" value="0">
+                </div>
+            </div>
+            
+            <!-- Datos del cliente -->
+            <div class="form-group">
+                <label for="nombre">Nombre completo *</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="telefono">Teléfono *</label>
+                <input type="tel" id="telefono" name="telefono" required>
+            </div>
+            
+            <!-- Método de pago -->
+            <div class="form-group payment-method">
+                <label>Método de pago *</label>
+                <div>
+                    <input type="radio" id="efectivo" name="metodo-pago" value="efectivo" class="payment-option" required>
+                    <label for="efectivo" style="display: inline;">Efectivo</label>
+                    
+                    <input type="radio" id="transferencia" name="metodo-pago" value="transferencia" class="payment-option">
+                    <label for="transferencia" style="display: inline;">Transferencia</label>
+                </div>
+            </div>
+            
+            <!-- Subir comprobante (si es transferencia) -->
+            <div class="form-group" id="comprobante-group" style="display: none;">
+                <label for="comprobante">Subir comprobante de transferencia *</label>
+                <input type="file" id="comprobante" name="comprobante" accept="image/*">
+            </div>
+            
+            <!-- Total -->
+            <div class="form-group">
+                <label>Total a pagar:</label>
+                <div id="total" style="font-size: 20px; color: #d35400;">$0</div>
+                <input type="hidden" name="total" id="total-hidden">
+            </div>
+            
+            <button type="submit">Enviar Pedido</button>
+        </form>
+    </div>
+
+    <!-- jQuery + Toastr JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
+    <script>
+        // Precios de los productos
+        const prices = {
+            "tamal-verde": 26,
+            "tamal-mole": 26,
+            "tamal-kool": 27
+        };
         
-        <select name="tipo-tamal" required>
-            <option value="" disabled selected>Elige el tipo de tamal</option>
-            <option value="verde">Tamal verde</option>
-            <option value="mole">Tamal de mole</option>
-            <option value="dulce">Tamal de salsa kool</option>
-        </select>
+        // Actualizar total
+        function updateTotal() {
+            let total = 0;
+            Object.keys(prices).forEach(product => {
+                const qty = parseInt($(`#${product}`).val());
+                total += qty * prices[product];
+            });
+            $("#total").text(`$${total}`);
+            $("#total-hidden").val(total);
+        }
         
-        <input type="number" name="cantidad" placeholder="Cantidad" min="1" required>
-        <textarea name="direccion" placeholder="Dirección de entrega" required></textarea>
-        <textarea name="comentarios" placeholder="Comentarios extras (ej: sin cilantro)"></textarea>
+        // Botones +/-
+        $(".plus").click(function() {
+            const product = $(this).data("product");
+            const qtyElement = $(`#${product}-qty`);
+            const inputElement = $(`#${product}`);
+            let qty = parseInt(qtyElement.text());
+            qty++;
+            qtyElement.text(qty);
+            inputElement.val(qty);
+            updateTotal();
+        });
         
-        <input type="hidden" name="_next" value="https://tusuario.github.io/pedidos-tamales/gracias.html">
-        <input type="hidden" name="_captcha" value="false">
+        $(".minus").click(function() {
+            const product = $(this).data("product");
+            const qtyElement = $(`#${product}-qty`);
+            const inputElement = $(`#${product}`);
+            let qty = parseInt(qtyElement.text());
+            if (qty > 0) {
+                qty--;
+                qtyElement.text(qty);
+                inputElement.val(qty);
+                updateTotal();
+            }
+        });
         
-        <button type="submit">Enviar Pedido</button>
-    </form>
+        // Mostrar campo de comprobante si es transferencia
+        $("input[name='metodo-pago']").change(function() {
+            if ($("#transferencia").is(":checked")) {
+                $("#comprobante-group").show();
+                $("#comprobante").prop("required", true);
+            } else {
+                $("#comprobante-group").hide();
+                $("#comprobante").prop("required", false);
+            }
+        });
+        
+        // Validación antes de enviar
+        $("#pedidoForm").submit(function(e) {
+            const total = parseInt($("#total-hidden").val());
+            if (total === 0) {
+                toastr.error("¡Selecciona al menos un tamal!");
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>
