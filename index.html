@@ -118,8 +118,9 @@
 
     <div class="container">
         <form id="pedidoForm" action="https://formsubmit.co/esccris17@gmail.com" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="_next" value="https://tusuario.github.io/pedidos-tamales/gracias.html">
+            <input type="hidden" name="_next" value="https://Crisz360.github.io/pedidos-tamales/gracias.html">
             <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="pedido_json" id="pedido-json" value="">
 
             <h3 class="mb-3 subtitles">Datos del Cliente <span class="text-danger">*</span></h3>
 
@@ -381,6 +382,20 @@
                 toastr.error("¡Debes subir el comprobante de transferencia!");
                 isValid = false;
             }
+
+            const pedido = {
+                nombre: $("#nombre").val(),
+                telefono: $("#telefono").val(),
+                productos: {
+                    rojo: $("#tamal-rojo").val(),
+                    verde: $("#tamal-verde").val(),
+                    kool: $("#tamal-kool").val()
+                },
+                total: $("#total-hidden").val(),
+                metodoPago: $("input[name='metodo-pago']:checked").val()
+            };
+
+            $("#pedido-json").val(JSON.stringify(pedido));
             
             if (!isValid) {
                 e.preventDefault();
