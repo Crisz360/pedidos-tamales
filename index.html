@@ -120,12 +120,11 @@
     </div>
 
     <div class="container">
-        <form id="pedidoForm" action="https://formsubmit.co/esccris17@gmail.com" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="_next" id="_next_url" value="">
+        <form id="pedidoForm" action="https://formsubmit.co/@gmail.com" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_next" value="https:/.github.io/pedidos-tamales/gracias.html?pedido=%pedido_json%">
             <input type="hidden" name="_subject" value="Nuevo pedido de tamales">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="pedido_json" id="pedido-json" value="">
 
             <h3 class="mb-3 subtitles">Datos del Cliente <span class="text-danger">*</span></h3>
 
@@ -345,11 +344,6 @@
             }
         }
         
-        // Configurar la URL base para la redirección
-        const baseUrl = window.location.href.includes('github.io') ? 
-            'https://Crisz360.github.io/pedidos-tamales/' : 
-            window.location.origin + '/';
-        
         $("#pedidoForm").submit(function(e) {
             let isValid = true;
             let hasSelection = false;
@@ -391,34 +385,25 @@
                 isValid = false;
             }
 
-            if (isValid) {
-                const pedido = {
-                    nombre: $("#nombre").val(),
-                    telefono: $("#telefono").val(),
-                    productos: {
-                        rojo: $("#tamal-rojo").val(),
-                        verde: $("#tamal-verde").val(),
-                        kool: $("#tamal-kool").val()
-                    },
-                    total: $("#total-hidden").val(),
-                    metodoPago: metodoPago
-                };
+            const pedido = {
+                nombre: $("#nombre").val(),
+                telefono: $("#telefono").val(),
+                productos: {
+                    rojo: $("#tamal-rojo").val(),
+                    verde: $("#tamal-verde").val(),
+                    kool: $("#tamal-kool").val()
+                },
+                total: $("#total-hidden").val(),
+                metodoPago: $("input[name='metodo-pago']:checked").val()
+            };
 
-                // Codificar el objeto pedido para URL
-                const pedidoCodificado = encodeURIComponent(JSON.stringify(pedido));
-                
-                // Guardar el JSON en el campo hidden
-                $("#pedido-json").val(pedidoCodificado);
-                
-                // Construir la URL de redirección
-                const nextUrl = `${baseUrl}gracias.html?pedido=${pedidoCodificado}`;
-                
-                // Actualizar el campo _next del formulario
-                $("#_next_url").val(nextUrl);
-                
-                toastr.success("¡Gracias por tu pedido! Estamos procesando tu solicitud.");
-            } else {
+            const pedidoCodificado = encodeURIComponent(JSON.stringify(pedido));
+            $("#pedido-json").val(pedidoCodificado);
+            
+            if (!isValid) {
                 e.preventDefault();
+            } else {
+                toastr.success("¡Gracias por tu pedido! Estamos procesando tu solicitud.");
             }
         });
 
