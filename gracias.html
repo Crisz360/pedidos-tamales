@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Pedido Enviado!</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"><!-- Bootstrap CSS -->
+    <title>¡Pedido Recibido!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
         body {
             background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
         }
         .success-container {
             max-width: 600px;
@@ -42,7 +44,25 @@
             border-left: 4px solid #ffc107;
             padding: 15px;
             margin-top: 15px;
-            display: none;
+        }
+        .client-info {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .text-orange {
+            color: #d35400;
+        }
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            margin-top: 15px;
+        }
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            color: white;
         }
     </style>
 </head>
@@ -50,15 +70,13 @@
     <div class="container">
         <div class="success-container">
             <div class="success-icon">✓</div>
-            <h1 class="mb-3">¡Pedido realizado con éxito!</h1>
+            <h1 class="mb-3 text-orange">¡Pedido recibido con éxito!</h1>
             <p class="lead">Gracias por tu compra. Hemos recibido tu pedido correctamente.</p>
             
+            <div id="cliente-info" class="client-info"></div>
             
-            <div id="cliente-info" class="mb-4 text-start"></div><!-- Datos del cliente -->
-            
-            
-            <div class="order-summary"><!-- Resumen del pedido -->
-                <h4 class="mb-3">Resumen de tu pedido:</h4>
+            <div class="order-summary">
+                <h4 class="mb-3 text-orange">Resumen de tu pedido:</h4>
                 <ul id="lista-pedido" class="list-unstyled mb-0"></ul>
                 <hr>
                 <div class="d-flex justify-content-between align-items-center">
@@ -66,8 +84,7 @@
                     <h4 class="mb-0 text-success" id="total-pedido"></h4>
                 </div>
                 
-                
-                <div id="bank-details" class="bank-details mt-3"><!-- Info bancaria-->
+                <div id="bank-details" class="bank-details mt-3" style="display: none;">
                     <h5 class="mb-2">Datos para transferencia:</h5>
                     <ul class="list-unstyled small">
                         <li><strong>Banco:</strong> BBVA</li>
@@ -75,7 +92,10 @@
                         <li><strong>CLABE:</strong> 0123 4567 8910 1112</li>
                         <li><strong>Tarjeta:</strong> 4152 3134 5678 9012</li>
                     </ul>
-                    <p class="small text-muted mt-2 mb-0">Por favor envía tu comprobante al WhatsApp: 55-1234-5678</p>
+                    <a href="https://wa.me/525512345678?text=Hola,%20acabo%20de%20hacer%20un%20pedido%20y%20quiero%20enviar%20el%20comprobante" 
+                       class="btn whatsapp-btn">
+                        <i class="bi bi-whatsapp"></i> Enviar comprobante por WhatsApp
+                    </a>
                 </div>
             </div>
             
@@ -88,7 +108,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Obtener los parámetros de la URL
             const urlParams = new URLSearchParams(window.location.search);
             const pedidoStr = urlParams.get('pedido');
             
@@ -98,23 +117,26 @@
                     
                     // Mostrar información del cliente
                     document.getElementById('cliente-info').innerHTML = `
-                        <p><strong>Nombre:</strong> ${pedido.nombre}</p>
-                        <p><strong>Teléfono:</strong> ${pedido.telefono}</p>
+                        <p><strong>Nombre:</strong> ${pedido.nombre || 'No proporcionado'}</p>
+                        <p><strong>Teléfono:</strong> ${pedido.telefono || 'No proporcionado'}</p>
                         <p><strong>Método de pago:</strong> ${pedido.metodoPago === 'transferencia' ? 'Transferencia bancaria' : 'Efectivo al recibir'}</p>
                     `;
                     
                     // Mostrar productos pedidos
                     const listaPedido = document.getElementById('lista-pedido');
                     let htmlProductos = '';
+                    let totalCalculado = 0;
                     
                     // Tamal Rojo
                     if (pedido.productos.rojo > 0) {
+                        const subtotal = pedido.productos.rojo * 26;
+                        totalCalculado += subtotal;
                         htmlProductos += `
                             <li class="d-flex align-items-center mb-3">
                                 <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" class="product-img">
                                 <div>
                                     <div>${pedido.productos.rojo} x Tamal de Salsa Roja</div>
-                                    <small class="text-muted">$${pedido.productos.rojo * 26}</small>
+                                    <small class="text-muted">$${subtotal}</small>
                                 </div>
                             </li>
                         `;
@@ -122,12 +144,14 @@
                     
                     // Tamal Verde
                     if (pedido.productos.verde > 0) {
+                        const subtotal = pedido.productos.verde * 26;
+                        totalCalculado += subtotal;
                         htmlProductos += `
                             <li class="d-flex align-items-center mb-3">
                                 <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" class="product-img">
                                 <div>
                                     <div>${pedido.productos.verde} x Tamal de Salsa Verde</div>
-                                    <small class="text-muted">$${pedido.productos.verde * 26}</small>
+                                    <small class="text-muted">$${subtotal}</small>
                                 </div>
                             </li>
                         `;
@@ -135,19 +159,21 @@
                     
                     // Tamal Kool
                     if (pedido.productos.kool > 0) {
+                        const subtotal = pedido.productos.kool * 27;
+                        totalCalculado += subtotal;
                         htmlProductos += `
                             <li class="d-flex align-items-center mb-3">
                                 <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" class="product-img">
                                 <div>
                                     <div>${pedido.productos.kool} x Tamal de Salsa Kool</div>
-                                    <small class="text-muted">$${pedido.productos.kool * 27}</small>
+                                    <small class="text-muted">$${subtotal}</small>
                                 </div>
                             </li>
                         `;
                     }
                     
                     listaPedido.innerHTML = htmlProductos;
-                    document.getElementById('total-pedido').textContent = `$${pedido.total}`;
+                    document.getElementById('total-pedido').textContent = `$${totalCalculado}`;
                     
                     // Mostrar datos bancarios si es transferencia
                     if (pedido.metodoPago === 'transferencia') {
@@ -158,14 +184,14 @@
                     console.error('Error al procesar el pedido:', e);
                     document.getElementById('cliente-info').innerHTML = `
                         <div class="alert alert-warning">
-                            No pudimos cargar los detalles de tu pedido. Por favor contáctanos directamente.
+                            No pudimos cargar los detalles de tu pedido. Por favor contáctanos directamente al: <strong>55-1234-5678</strong>
                         </div>
                     `;
                 }
             } else {
                 document.getElementById('cliente-info').innerHTML = `
                     <div class="alert alert-warning">
-                        No se recibieron datos del pedido. Por favor contáctanos directamente.
+                        No se recibieron datos del pedido. Por favor contáctanos directamente al: <strong>55-1234-5678</strong>
                     </div>
                 `;
             }
