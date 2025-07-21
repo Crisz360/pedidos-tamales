@@ -11,6 +11,25 @@
     <!-- Lightbox CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
     <style>
+        body {
+            font-family: 'arial', sans-serif;
+        }
+        #title{
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .datainput {
+            text-align: center;
+            font-size: 1rem;
+            font-weight: bold;;
+        }
+        .subtitles{
+            text-align: justify;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d35400;
+        }
         .product-card {
             transition: all 0.3s ease;
             margin-bottom: 15px;
@@ -93,27 +112,29 @@
 </head>
 <body>
     <div class="header text-center">
-        <h1>¡Ordena Tus Tamales!</h1>
-        <p class="lead">Deliciosos tamales hechos con receta tradicional</p>
+        <h1 id="title">¡Ordena Tus Tamales!</h1>
+        <p class="lead">Deliciosos tamales</p>
     </div>
 
     <div class="container">
         <form id="pedidoForm" action="https://formsubmit.co/esccris17@gmail.com" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="_next" value="https://tusuario.github.io/pedidos-tamales/enviado.html">
+            <input type="hidden" name="_next" value="https://tusuario.github.io/pedidos-tamales/gracias.html">
             <input type="hidden" name="_captcha" value="false">
+
+            <h3 class="mb-3 subtitles">Datos del Cliente <span class="text-danger">*</span></h3>
 
             <div class="row mb-4"> <!-- Datos del cliente -->
                 <div class="col-md-6 mb-3">
-                    <label for="nombre" class="form-label">Nombre completo *</label>
+                    <label for="nombre" class="form-label datainput">Nombre completo: <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="nombre" name="nombre">
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="telefono" class="form-label">Teléfono *</label>
+                    <label for="telefono" class="form-label datainput">Teléfono: <span class="text-danger">*</span></label>
                     <input type="tel" class="form-control" id="telefono" name="telefono">
                 </div>
             </div>
 
-            <h3 class="mb-3">Nuestros Tamales</h3> <!-- Productos -->
+            <h3 class="mb-3 subtitles">Nuestros Tamales <span class="text-danger">*</span></h3> <!-- Productos -->
             
             <div class="card product-card">
                 <div class="card-body">
@@ -187,11 +208,11 @@
                 </div>
             </div>
 
-            <h3 class="mt-4 mb-3">Método de Pago</h3> <!-- Método de pago -->
+            <h3 class="mt-4 mb-3 subtitles">Método de Pago <span class="text-danger">*</span></h3> <!-- Método de pago -->
             <div class="mb-3">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="metodo-pago" id="efectivo" value="efectivo">
-                    <label class="form-check-label" for="efectivo">
+                    <label class="form-check-label" for="efectivo" checked>
                         Efectivo al recibir
                     </label>
                 </div>
