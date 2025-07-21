@@ -71,6 +71,24 @@
             border-radius: 5px;
             border: 1px solid #ddd;
         }
+        .lightbox .lb-close {
+            top: 20px;
+            right: 20px;
+        }
+        @media (max-width: 768px) {
+            .product-img {
+                width: 60px;
+                height: 60px;
+            }
+            .quantity-btn {
+                width: 25px;
+                height: 25px;
+                font-size: 0.8rem;
+            }
+            .quantity {
+                margin: 0 5px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -80,31 +98,29 @@
     </div>
 
     <div class="container">
-        <form id="pedidoForm" action="https://formsubmit.co/esccris11@gmail.com" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="_next" value="https://tusuario.github.io/pedidos-tamales/gracias.html">
+        <form id="pedidoForm" action="https://formsubmit.co/esccris17@gmail.com" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_next" value="https://tusuario.github.io/pedidos-tamales/enviado.html">
             <input type="hidden" name="_captcha" value="false">
 
-            <!-- Datos del cliente -->
-            <div class="row mb-4">
+            <div class="row mb-4"> <!-- Datos del cliente -->
                 <div class="col-md-6 mb-3">
                     <label for="nombre" class="form-label">Nombre completo *</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="telefono" class="form-label">Teléfono *</label>
-                    <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                    <input type="tel" class="form-control" id="telefono" name="telefono">
                 </div>
             </div>
 
-            <!-- Productos -->
-            <h3 class="mb-3">Nuestros Tamales</h3>
+            <h3 class="mb-3">Nuestros Tamales</h3> <!-- Productos -->
             
             <div class="card product-card">
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-1">
-                            <a href="https://via.placeholder.com/800x600?text=Tamal+Rojo" data-lightbox="tamal-rojo" data-title="Tamal de Salsa Roja">
-                                <img src="https://via.placeholder.com/150?text=Tamal+Rojo" alt="Tamal Rojo" class="product-img">
+                            <a href="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" data-lightbox="tamal-rojo" data-title="Tamal de Salsa Roja">
+                                <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" alt="Tamal Rojo" class="product-img">
                             </a>
                         </div>
                         <div class="col-md-5">
@@ -127,8 +143,8 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-1">
-                            <a href="https://via.placeholder.com/800x600?text=Tamal+Verde" data-lightbox="tamal-verde" data-title="Tamal de Salsa Verde">
-                                <img src="https://via.placeholder.com/150?text=Tamal+Verde" alt="Tamal Verde" class="product-img">
+                            <a href="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" data-lightbox="tamal-verde" data-title="Tamal de Salsa Verde">
+                                <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" alt="Tamal Verde" class="product-img">
                             </a>
                         </div>
                         <div class="col-md-5">
@@ -151,8 +167,8 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-1">
-                            <a href="https://via.placeholder.com/800x600?text=Tamal+Kool" data-lightbox="tamal-kool" data-title="Tamal de Salsa Kool">
-                                <img src="https://via.placeholder.com/150?text=Tamal+Kool" alt="Tamal Kool" class="product-img">
+                            <a href="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" data-lightbox="tamal-kool" data-title="Tamal de Salsa Kool">
+                                <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" alt="Tamal Kool" class="product-img">
                             </a>
                         </div>
                         <div class="col-md-5">
@@ -171,11 +187,10 @@
                 </div>
             </div>
 
-            <!-- Método de pago -->
-            <h3 class="mt-4 mb-3">Método de Pago</h3>
+            <h3 class="mt-4 mb-3">Método de Pago</h3> <!-- Método de pago -->
             <div class="mb-3">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="metodo-pago" id="efectivo" value="efectivo" required>
+                    <input class="form-check-input" type="radio" name="metodo-pago" id="efectivo" value="efectivo">
                     <label class="form-check-label" for="efectivo">
                         Efectivo al recibir
                     </label>
@@ -188,12 +203,11 @@
                 </div>
             </div>
 
-            <!-- Info bancaria (solo para transferencia) -->
-            <div id="bank-info-container" class="bank-info">
+            <div id="bank-info-container" class="bank-info">  <!-- Info bancaria -->
                 <h5>Datos Bancarios para Transferencia</h5>
                 <ul class="list-unstyled">
                     <li><strong>Banco:</strong> BBVA</li>
-                    <li><strong>Nombre:</strong> Tamales</li>
+                    <li><strong>Nombre:</strong> Tamales Doña Maria</li>
                     <li><strong>CLABE:</strong> 0123 4567 8910 1112</li>
                     <li><strong>Tarjeta:</strong> 4152 3134 5678 9012</li>
                 </ul>
@@ -204,49 +218,59 @@
                 </div>
             </div>
 
-            <!-- Total -->
-            <div class="d-flex justify-content-between align-items-center mt-4 p-3 bg-light rounded">
+            <div class="d-flex justify-content-between align-items-center mt-4 p-3 bg-light rounded"> <!-- Total -->
                 <h4 class="mb-0">Total a pagar:</h4>
                 <div class="total-display" id="total">$0</div>
                 <input type="hidden" name="total" id="total-hidden">
             </div>
 
-            <!-- Botón de enviar -->
-            <div class="d-grid gap-2 mt-4">
+            <div class="d-grid gap-2 mt-4"> <!-- Botón de enviar -->
                 <button type="submit" class="btn btn-primary btn-lg">Enviar Pedido</button>
             </div>
         </form>
     </div>
 
-    <!-- Bootstrap JS + Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- jQuery + Toastr JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> <!-- Bootstrap JS + Popper -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery + Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <!-- Lightbox JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script> <!-- Lightbox JS -->
     
     <script>
-        // Precios de los productos
-        const prices = {
+        toastr.options = { // Configuración de Toastr
+            "closeButton": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000"
+        };
+
+        const prices = { // Precios de los productos
             "tamal-rojo": 26,
             "tamal-verde": 26,
             "tamal-kool": 27
         };
         
-        // Actualizar total
-        function updateTotal() {
+        function updateTotal() { // Actualizar total
             let total = 0;
+            let hasSelection = false;
+            
             Object.keys(prices).forEach(product => {
-                const qty = parseInt($(`#${product}`).val());
+                const qty = parseInt($(`#${product}`).val()) || 0;
                 total += qty * prices[product];
+                if (qty > 0) hasSelection = true;
             });
+            
             $("#total").text(`$${total}`);
             $("#total-hidden").val(total);
+            
+            if (hasSelection) {
+                $(".product-card").removeClass("error-border");
+            }
         }
         
-        // Botones +/-
-        $(".plus").click(function() {
+        $(".plus").click(function() { // Botones +/-
             const product = $(this).data("product");
             const qtyElement = $(`#${product}-qty`);
             const inputElement = $(`#${product}`);
@@ -270,19 +294,15 @@
             }
         });
         
-        // Mostrar info bancaria si es transferencia
-        $("input[name='metodo-pago']").change(function() {
+        $("input[name='metodo-pago']").change(function() { // Mostrar info bancaria si es transferencia
             if ($("#transferencia").is(":checked")) {
                 $("#bank-info-container").show();
-                $("#comprobante").prop("required", true);
             } else {
                 $("#bank-info-container").hide();
-                $("#comprobante").prop("required", false);
             }
         });
         
-        // Vista previa de imagen del comprobante
-        function previewImage(input) {
+        function previewImage(input) { // Vista previa de imagen del comprobante
             const preview = document.getElementById('comprobante-preview');
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
@@ -294,25 +314,65 @@
             }
         }
         
-        // Validación antes de enviar
-        $("#pedidoForm").submit(function(e) {
-            const total = parseInt($("#total-hidden").val());
-            if (total === 0) {
+        $("#pedidoForm").submit(function(e) { // Validación antes de enviar
+            let isValid = true;
+            let hasSelection = false;
+
+            Object.keys(prices).forEach(product => { // Validar productos seleccionados
+                const qty = parseInt($(`#${product}`).val()) || 0;
+                if (qty > 0) hasSelection = true;
+            });
+
+            if (!hasSelection) { // Validar productos seleccionados
                 toastr.error("¡Debes seleccionar al menos un tamal!");
-                e.preventDefault();
+                $(".product-card").addClass("error-border");
+                isValid = false;
             }
             
-            if ($("#transferencia").is(":checked") && $("#comprobante").val() === "") {
+            const nombre = $("#nombre").val().trim(); // Validar nombre
+            if (nombre === "") {
+                toastr.error("Por favor ingresa tu nombre completo");
+                isValid = false;
+            }
+            
+            const telefono = $("#telefono").val().trim();
+            if (telefono === "") {
+                toastr.error("Por favor ingresa tu número de teléfono");
+                isValid = false;
+            } else if (!/^[0-9]{10}$/.test(telefono)) {
+                toastr.error("Por favor ingresa un número de teléfono válido (10 dígitos)");
+                isValid = false;
+            }
+            
+            const total = parseInt($("#total-hidden").val()); // Validar productos seleccionados
+            if (total === 1) {
+                toastr.error("¡Debes seleccionar al menos un tamal!");
+                isValid = false;
+            }
+            
+            const metodoPago = $("input[name='metodo-pago']:checked").val(); // Validar método de pago
+            if (!metodoPago) {
+                toastr.error("Por favor selecciona un método de pago");
+                isValid = false;
+            }
+            
+            if (metodoPago === "transferencia" && $("#comprobante").val() === "") {// Validar comprobante si es transferencia
                 toastr.error("¡Debes subir el comprobante de transferencia!");
+                isValid = false;
+            }
+            
+            if (!isValid) {
                 e.preventDefault();
+            } else {
+                toastr.success("¡Gracias por tu pedido! Estamos procesando tu solicitud.");
             }
         });
 
-        // Configuración de Lightbox
         lightbox.option({
             'resizeDuration': 200,
             'wrapAround': true,
-            'showImageNumberLabel': false
+            'showImageNumberLabel': false,
+            'disableScrolling': true
         });
     </script>
 </body>
