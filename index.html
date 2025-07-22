@@ -12,9 +12,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: 'arial', sans-serif;
+            font-family: 'Arial', sans-serif;
         }
-        #title{
+        #title {
             text-align: center;
             font-size: 2rem;
             font-weight: bold;
@@ -22,9 +22,9 @@
         .datainput {
             text-align: center;
             font-size: 1rem;
-            font-weight: bold;;
+            font-weight: bold;
         }
-        .subtitles{
+        .subtitles {
             text-align: justify;
             font-size: 1.5rem;
             font-weight: bold;
@@ -90,10 +90,6 @@
             border-radius: 5px;
             border: 1px solid #ddd;
         }
-        .lightbox .lb-close {
-            top: 20px;
-            right: 20px;
-        }
         .error-border {
             border: 1px solid #dc3545 !important;
         }
@@ -107,35 +103,27 @@
                 height: 25px;
                 font-size: 0.8rem;
             }
-            .quantity {
-                margin: 0 5px;
-            }
         }
     </style>
 </head>
 <body>
     <div class="header text-center">
         <h1 id="title">¡Ordena Tus Tamales!</h1>
-        <p class="lead">Deliciosos tamales</p>
+        <p class="lead">Deliciosos tamales hechos a mano</p>
     </div>
 
     <div class="container">
-        <form id="pedidoForm" action="https://formsubmit.co/esccris17@gmail.com" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="_next" value="https://Crisz360.github.io/pedidos-tamales/gracias.html">
-            <input type="hidden" name="_subject" value="Nuevo pedido de tamales">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-
+        <form id="pedidoForm">
             <h3 class="mb-3 subtitles">Datos del Cliente <span class="text-danger">*</span></h3>
 
             <div class="row mb-4">
                 <div class="col-md-6 mb-3">
                     <label for="nombre" class="form-label datainput">Nombre completo: <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="nombre" name="nombre">
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="telefono" class="form-label datainput">Teléfono: <span class="text-danger">*</span></label>
-                    <input type="tel" class="form-control" id="telefono" name="telefono">
+                    <input type="tel" class="form-control" id="telefono" name="telefono" required>
                 </div>
             </div>
 
@@ -146,8 +134,8 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-1">
-                            <a href="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" data-lightbox="tamal-rojo" data-title="Tamal de Salsa Roja">
-                                <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" alt="Tamal Rojo" class="product-img">
+                            <a href="https://img.chilango.com/2025/01/feria-del-tamal-2025.jpg" data-lightbox="tamal-rojo" data-title="Tamal de Salsa Roja">
+                                <img src="https://img.chilango.com/2025/01/feria-del-tamal-2025.jpg" alt="Tamal Rojo" class="product-img">
                             </a>
                         </div>
                         <div class="col-md-5">
@@ -170,8 +158,8 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-1">
-                            <a href="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" data-lightbox="tamal-verde" data-title="Tamal de Salsa Verde">
-                                <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" alt="Tamal Verde" class="product-img">
+                            <a href="https://img.chilango.com/2025/01/feria-del-tamal-2025.jpg" data-lightbox="tamal-verde" data-title="Tamal de Salsa Verde">
+                                <img src="https://img.chilango.com/2025/01/feria-del-tamal-2025.jpg" alt="Tamal Verde" class="product-img">
                             </a>
                         </div>
                         <div class="col-md-5">
@@ -194,8 +182,8 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-1">
-                            <a href="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" data-lightbox="tamal-kool" data-title="Tamal de Salsa Kool">
-                                <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" alt="Tamal Kool" class="product-img">
+                            <a href="https://img.chilango.com/2025/01/feria-del-tamal-2025.jpg" data-lightbox="tamal-kool" data-title="Tamal de Salsa Kool">
+                                <img src="https://img.chilango.com/2025/01/feria-del-tamal-2025.jpg" alt="Tamal Kool" class="product-img">
                             </a>
                         </div>
                         <div class="col-md-5">
@@ -234,13 +222,13 @@
                 <h5>Datos Bancarios para Transferencia</h5>
                 <ul class="list-unstyled">
                     <li><strong>Banco:</strong> BBVA</li>
-                    <li><strong>Nombre:</strong> Tamales</li>
+                    <li><strong>Nombre:</strong> Tamales Deliciosos</li>
                     <li><strong>CLABE:</strong> 0123 4567 8910 1112</li>
                     <li><strong>Tarjeta:</strong> 4152 3134 5678 9012</li>
                 </ul>
                 <div class="mb-3">
                     <label for="comprobante" class="form-label">Subir comprobante de transferencia *</label>
-                    <input class="form-control" type="file" id="comprobante" name="comprobante" accept="image/*" onchange="previewImage(this)">
+                    <input class="form-control" type="file" id="comprobante" name="comprobante" accept="image/*">
                     <img id="comprobante-preview" class="img-preview" alt="Vista previa del comprobante">
                 </div>
             </div>
@@ -266,137 +254,186 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     
     <script>
+        // Configuración inicial
         toastr.options = {
-            "closeButton": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": true,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000"
+            closeButton: true,
+            positionClass: "toast-top-right",
+            preventDuplicates: true,
+            showDuration: 300,
+            hideDuration: 1000,
+            timeOut: 5000
         };
 
-        const prices = {
+        // Precios de los productos
+        const productPrices = {
             "tamal-rojo": 26,
             "tamal-verde": 26,
             "tamal-kool": 27
         };
-        
+
+        // URL de tu Google Apps Script (debes reemplazarla con la tuya)
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbz5G_AdRN9gqwH8ilyLOa8zTOqHZMfAoLGZxFvJ9p9KBIASnwgMxEiYCDJCklXYz4BHxw/exec';
+
+        // Mostrar/ocultar información bancaria según método de pago
+        $("input[name='metodo-pago']").change(function() {
+            $("#bank-info-container").toggle($("#transferencia").is(":checked"));
+        });
+
+        // Manejar incremento/decremento de cantidades
+        $(document).on('click', '.plus', function() {
+            const productId = $(this).data('product');
+            const quantityElement = $(`#${productId}-qty`);
+            const inputElement = $(`#${productId}`);
+            let currentQty = parseInt(quantityElement.text());
+            
+            currentQty++;
+            quantityElement.text(currentQty);
+            inputElement.val(currentQty);
+            updateTotal();
+        });
+
+        $(document).on('click', '.minus', function() {
+            const productId = $(this).data('product');
+            const quantityElement = $(`#${productId}-qty`);
+            const inputElement = $(`#${productId}`);
+            let currentQty = parseInt(quantityElement.text());
+            
+            if (currentQty > 0) {
+                currentQty--;
+                quantityElement.text(currentQty);
+                inputElement.val(currentQty);
+                updateTotal();
+            }
+        });
+
+        // Vista previa del comprobante
+        $("#comprobante").change(function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#comprobante-preview").attr('src', e.target.result).show();
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Actualizar el total
         function updateTotal() {
             let total = 0;
             let hasSelection = false;
-            
-            Object.keys(prices).forEach(product => {
-                const qty = parseInt($(`#${product}`).val()) || 0;
-                total += qty * prices[product];
-                if (qty > 0) hasSelection = true;
-            });
-            
+
+            for (const productId in productPrices) {
+                const quantity = parseInt($(`#${productId}`).val()) || 0;
+                total += quantity * productPrices[productId];
+                if (quantity > 0) hasSelection = true;
+            }
+
             $("#total").text(`$${total}`);
             $("#total-hidden").val(total);
-            
+
             if (hasSelection) {
                 $(".product-card").removeClass("error-border");
             }
         }
-        
-        $(".plus").click(function() {
-            const product = $(this).data("product");
-            const qtyElement = $(`#${product}-qty`);
-            const inputElement = $(`#${product}`);
-            let qty = parseInt(qtyElement.text());
-            qty++;
-            qtyElement.text(qty);
-            inputElement.val(qty);
-            updateTotal();
-        });
-        
-        $(".minus").click(function() {
-            const product = $(this).data("product");
-            const qtyElement = $(`#${product}-qty`);
-            const inputElement = $(`#${product}`);
-            let qty = parseInt(qtyElement.text());
-            if (qty > 0) {
-                qty--;
-                qtyElement.text(qty);
-                inputElement.val(qty);
-                updateTotal();
-            }
-        });
-        
-        $("input[name='metodo-pago']").change(function() {
-            if ($("#transferencia").is(":checked")) {
-                $("#bank-info-container").show();
-            } else {
-                $("#bank-info-container").hide();
-            }
-        });
-        
-        function previewImage(input) {
-            const preview = document.getElementById('comprobante-preview');
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-        
+
+        // Validar y enviar el formulario
         $("#pedidoForm").submit(function(e) {
+            e.preventDefault();
+            
             let isValid = true;
-            let hasSelection = false;
+            let errorMessage = '';
 
-            Object.keys(prices).forEach(product => {
-                const qty = parseInt($(`#${product}`).val()) || 0;
-                if (qty > 0) hasSelection = true;
-            });
+            // Validar datos del cliente
+            const nombre = $("#nombre").val().trim();
+            if (!nombre) {
+                errorMessage = "Por favor ingresa tu nombre completo";
+                isValid = false;
+            }
 
-            if (!hasSelection) {
-                toastr.error("¡Debes seleccionar al menos un tamal!");
+            const telefono = $("#telefono").val().trim();
+            if (!telefono) {
+                errorMessage = "Por favor ingresa tu número de teléfono";
+                isValid = false;
+            } else if (!/^\d{10}$/.test(telefono)) {
+                errorMessage = "El teléfono debe tener 10 dígitos";
+                isValid = false;
+            }
+
+            // Validar selección de productos
+            let hasProducts = false;
+            for (const productId in productPrices) {
+                if (parseInt($(`#${productId}`).val()) > 0) {
+                    hasProducts = true;
+                    break;
+                }
+            }
+            
+            if (!hasProducts) {
+                errorMessage = "Debes seleccionar al menos un tamal";
                 $(".product-card").addClass("error-border");
                 isValid = false;
             }
-            
-            const nombre = $("#nombre").val().trim();
-            if (nombre === "") {
-                toastr.error("Por favor ingresa tu nombre completo");
-                isValid = false;
-            }
-            
-            const telefono = $("#telefono").val().trim();
-            if (telefono === "") {
-                toastr.error("Por favor ingresa tu número de teléfono");
-                isValid = false;
-            } else if (!/^[0-9]{10}$/.test(telefono)) {
-                toastr.error("Por favor ingresa un número de teléfono válido (10 dígitos)");
-                isValid = false;
-            }
-            
+
+            // Validar método de pago
             const metodoPago = $("input[name='metodo-pago']:checked").val();
             if (!metodoPago) {
-                toastr.error("Por favor selecciona un método de pago");
+                errorMessage = "Selecciona un método de pago";
                 isValid = false;
             }
-            
+
+            // Validar comprobante si es transferencia
             if (metodoPago === "transferencia" && $("#comprobante").val() === "") {
-                toastr.error("¡Debes subir el comprobante de transferencia!");
+                errorMessage = "Debes subir el comprobante de transferencia";
                 isValid = false;
             }
-            
+
             if (!isValid) {
-                e.preventDefault();
-            } else {
-                toastr.success("¡Gracias por tu pedido! Estamos procesando tu solicitud.");
+                toastr.error(errorMessage);
+                return false;
             }
+
+            // Preparar datos para enviar
+            const formData = new FormData();
+            formData.append('nombre', nombre);
+            formData.append('telefono', telefono);
+            formData.append('tamal-rojo', $("#tamal-rojo").val());
+            formData.append('tamal-verde', $("#tamal-verde").val());
+            formData.append('tamal-kool', $("#tamal-kool").val());
+            formData.append('total', $("#total-hidden").val());
+            formData.append('metodo-pago', metodoPago);
+            
+            if (metodoPago === "transferencia" && $("#comprobante")[0].files[0]) {
+                formData.append('comprobante', $("#comprobante")[0].files[0]);
+            }
+
+            // Enviar datos al Google Apps Script
+            $.ajax({
+                url: scriptUrl,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    toastr.success("Pedido enviado correctamente");
+                    $("#pedidoForm")[0].reset();
+                    $(".quantity").text('0');
+                    $("input[type='hidden'][name^='tamal-']").val('0');
+                    $("#total").text('$0');
+                    $("#comprobante-preview").hide();
+                    $("#bank-info-container").hide();
+                },
+                error: function(xhr, status, error) {
+                    toastr.error("Error al enviar el pedido: " + error);
+                }
+            });
         });
 
+        // Configuración de lightbox
         lightbox.option({
-            'resizeDuration': 200,
-            'wrapAround': true,
-            'showImageNumberLabel': false,
-            'disableScrolling': true
+            resizeDuration: 200,
+            wrapAround: true,
+            showImageNumberLabel: false
         });
     </script>
 </body>
