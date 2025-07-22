@@ -151,7 +151,7 @@
                             </a>
                         </div>
                         <div class="col-md-5">
-                            <h5 class="card-title">Tamal de Salsa Roja</h5>
+                            <h5 class="card-title">Tamal de Salsa Guajillo</h5>
                             <p class="card-text text-success">$26 c/u</p>
                         </div>
                         <div class="col-md-6">
@@ -252,7 +252,7 @@
             </div>
 
             <div class="d-grid gap-2 mt-4">
-                <button type="submit" class="btn btn-primary btn-lg">Enviar Pedido</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="submitForm()">Enviar Pedido</button>
             </div>
         </form>
     </div>
@@ -266,138 +266,203 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     
     <script>
-        toastr.options = {
-            "closeButton": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": true,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000"
-        };
+       // Configuración de Toastr (mantén tu configuración actual)
+toastr.options = {
+  "closeButton": true,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": true,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000"
+};
 
-        const prices = {
-            "tamal-rojo": 26,
-            "tamal-verde": 26,
-            "tamal-kool": 27
-        };
-        
-        function updateTotal() {
-            let total = 0;
-            let hasSelection = false;
-            
-            Object.keys(prices).forEach(product => {
-                const qty = parseInt($(`#${product}`).val()) || 0;
-                total += qty * prices[product];
-                if (qty > 0) hasSelection = true;
-            });
-            
-            $("#total").text(`$${total}`);
-            $("#total-hidden").val(total);
-            
-            if (hasSelection) {
-                $(".product-card").removeClass("error-border");
-            }
-        }
-        
-        $(".plus").click(function() {
-            const product = $(this).data("product");
-            const qtyElement = $(`#${product}-qty`);
-            const inputElement = $(`#${product}`);
-            let qty = parseInt(qtyElement.text());
-            qty++;
-            qtyElement.text(qty);
-            inputElement.val(qty);
-            updateTotal();
-        });
-        
-        $(".minus").click(function() {
-            const product = $(this).data("product");
-            const qtyElement = $(`#${product}-qty`);
-            const inputElement = $(`#${product}`);
-            let qty = parseInt(qtyElement.text());
-            if (qty > 0) {
-                qty--;
-                qtyElement.text(qty);
-                inputElement.val(qty);
-                updateTotal();
-            }
-        });
-        
-        $("input[name='metodo-pago']").change(function() {
-            if ($("#transferencia").is(":checked")) {
-                $("#bank-info-container").show();
-            } else {
-                $("#bank-info-container").hide();
-            }
-        });
-        
-        function previewImage(input) {
-            const preview = document.getElementById('comprobante-preview');
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-        
-        $("#pedidoForm").submit(function(e) {
-            let isValid = true;
-            let hasSelection = false;
+// Precios de los productos
+const prices = {
+  "tamal-rojo": 26,
+  "tamal-verde": 26,
+  "tamal-kool": 27
+};
 
-            Object.keys(prices).forEach(product => {
-                const qty = parseInt($(`#${product}`).val()) || 0;
-                if (qty > 0) hasSelection = true;
-            });
+// URL de tu Google Apps Script (reemplázala después de publicar)
+const SCRIPT_URL = 'https://script.google.com/macros/s/TU_ID_DE_SCRIPT/exec';
 
-            if (!hasSelection) {
-                toastr.error("¡Debes seleccionar al menos un tamal!");
-                $(".product-card").addClass("error-border");
-                isValid = false;
-            }
-            
-            const nombre = $("#nombre").val().trim();
-            if (nombre === "") {
-                toastr.error("Por favor ingresa tu nombre completo");
-                isValid = false;
-            }
-            
-            const telefono = $("#telefono").val().trim();
-            if (telefono === "") {
-                toastr.error("Por favor ingresa tu número de teléfono");
-                isValid = false;
-            } else if (!/^[0-9]{10}$/.test(telefono)) {
-                toastr.error("Por favor ingresa un número de teléfono válido (10 dígitos)");
-                isValid = false;
-            }
-            
-            const metodoPago = $("input[name='metodo-pago']:checked").val();
-            if (!metodoPago) {
-                toastr.error("Por favor selecciona un método de pago");
-                isValid = false;
-            }
-            
-            if (metodoPago === "transferencia" && $("#comprobante").val() === "") {
-                toastr.error("¡Debes subir el comprobante de transferencia!");
-                isValid = false;
-            }
-            
-            if (!isValid) {
-                e.preventDefault();
-            } else {
-                toastr.success("¡Gracias por tu pedido! Estamos procesando tu solicitud.");
-            }
-        });
+// Función para actualizar el total
+function updateTotal() {
+  let total = 0;
+  let hasSelection = false;
+  
+  Object.keys(prices).forEach(product => {
+    const qty = parseInt($(`#${product}`).val()) || 0;
+    total += qty * prices[product];
+    if (qty > 0) hasSelection = true;
+  });
+  
+  $("#total").text(`$${total}`);
+  $("#total-hidden").val(total);
+  
+  if (hasSelection) {
+    $(".product-card").removeClass("error-border");
+  }
+}
 
-        lightbox.option({
-            'resizeDuration': 200,
-            'wrapAround': true,
-            'showImageNumberLabel': false,
-            'disableScrolling': true
-        });
+// Controladores de los botones +/-
+$(".plus").click(function() {
+  const product = $(this).data("product");
+  const qtyElement = $(`#${product}-qty`);
+  const inputElement = $(`#${product}`);
+  let qty = parseInt(qtyElement.text());
+  qty++;
+  qtyElement.text(qty);
+  inputElement.val(qty);
+  updateTotal();
+});
+
+$(".minus").click(function() {
+  const product = $(this).data("product");
+  const qtyElement = $(`#${product}-qty`);
+  const inputElement = $(`#${product}`);
+  let qty = parseInt(qtyElement.text());
+  if (qty > 0) {
+    qty--;
+    qtyElement.text(qty);
+    inputElement.val(qty);
+    updateTotal();
+  }
+});
+
+// Mostrar/ocultar datos bancarios
+$("input[name='metodo-pago']").change(function() {
+  if ($("#transferencia").is(":checked")) {
+    $("#bank-info-container").show();
+  } else {
+    $("#bank-info-container").hide();
+  }
+});
+
+// Vista previa de la imagen del comprobante
+function previewImage(input) {
+  const preview = document.getElementById('comprobante-preview');
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+// Función principal para enviar el formulario
+async function submitForm() {
+  // Validación del formulario
+  let isValid = true;
+  let hasSelection = false;
+
+  // Validar que se haya seleccionado al menos un tamal
+  Object.keys(prices).forEach(product => {
+    const qty = parseInt($(`#${product}`).val()) || 0;
+    if (qty > 0) hasSelection = true;
+  });
+
+  if (!hasSelection) {
+    toastr.error("¡Debes seleccionar al menos un tamal!");
+    $(".product-card").addClass("error-border");
+    isValid = false;
+  }
+  
+  // Validar nombre
+  const nombre = $("#nombre").val().trim();
+  if (nombre === "") {
+    toastr.error("Por favor ingresa tu nombre completo");
+    $("#nombre").addClass("error-border");
+    isValid = false;
+  } else {
+    $("#nombre").removeClass("error-border");
+  }
+  
+  // Validar teléfono
+  const telefono = $("#telefono").val().trim();
+  if (telefono === "") {
+    toastr.error("Por favor ingresa tu número de teléfono");
+    $("#telefono").addClass("error-border");
+    isValid = false;
+  } else if (!/^[0-9]{10}$/.test(telefono)) {
+    toastr.error("Por favor ingresa un número de teléfono válido (10 dígitos)");
+    $("#telefono").addClass("error-border");
+    isValid = false;
+  } else {
+    $("#telefono").removeClass("error-border");
+  }
+  
+  // Validar método de pago
+  const metodoPago = $("input[name='metodo-pago']:checked").val();
+  if (!metodoPago) {
+    toastr.error("Por favor selecciona un método de pago");
+    isValid = false;
+  }
+  
+  // Validar comprobante si es transferencia
+  if (metodoPago === "transferencia" && $("#comprobante").val() === "") {
+    toastr.error("¡Debes subir el comprobante de transferencia!");
+    isValid = false;
+  }
+  
+  if (!isValid) {
+    return false;
+  }
+
+  // Mostrar carga
+  toastr.info("Enviando pedido...", "", {timeOut: 0});
+  
+  try {
+    // Preparar datos para enviar
+    const formData = {
+      nombre: nombre,
+      telefono: telefono,
+      'tamal-rojo': $("#tamal-rojo").val(),
+      'tamal-verde': $("#tamal-verde").val(),
+      'tamal-kool': $("#tamal-kool").val(),
+      'metodo-pago': metodoPago,
+      total: $("#total-hidden").val()
+    };
+
+    // Enviar datos al Google Script
+    const response = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
+    
+    const result = await response.json();
+    
+    // Limpiar notificación de carga
+    toastr.clear();
+    
+    if (result.success) {
+      toastr.success("¡Pedido enviado con éxito! Redirigiendo...");
+      // Redirigir a la página de agradecimiento después de 2 segundos
+      setTimeout(() => {
+        window.location.href = "gracias.html";
+      }, 2000);
+    } else {
+      toastr.error("Error al enviar el pedido: " + result.message);
+    }
+  } catch (error) {
+    toastr.clear();
+    toastr.error("Error de conexión: " + error.message);
+  }
+}
+
+// Configuración de Lightbox (mantén tu configuración actual)
+lightbox.option({
+  'resizeDuration': 200,
+  'wrapAround': true,
+  'showImageNumberLabel': false,
+  'disableScrolling': true
+});
     </script>
 </body>
 </html>
