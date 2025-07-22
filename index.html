@@ -291,7 +291,7 @@
     
     <script>
         // URL de tu Google Apps Script (reemplaza con tu URL)
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz5G_AdRN9gqwH8ilyLOa8zTOqHZMfAoLGZxFvJ9p9KBIASnwgMxEiYCDJCklXYz4BHxw/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycb.../exec';
         // URL de FormSubmit
         const FORM_SUBMIT_URL = 'https://formsubmit.co/esccris17@gmail.com';
 
@@ -464,13 +464,25 @@
             }
 
             try {
-                // Crear FormData para enviar
-                const formData = new FormData(document.getElementById('pedidoForm'));
-                
-                // 1. Enviar a Google Apps Script
+                // Crear objeto con los datos del formulario
+                const formData = {
+                    nombre: $("#nombre").val().trim(),
+                    telefono: $("#telefono").val().trim(),
+                    "tamal-rojo": $("#tamal-rojo").val(),
+                    "tamal-verde": $("#tamal-verde").val(),
+                    "tamal-kool": $("#tamal-kool").val(),
+                    total: $("#total-hidden").val(),
+                    "metodo-pago": $("input[name='metodo-pago']:checked").val(),
+                    comprobante: $("#comprobante").val() ? "SI" : "NO"
+                };
+
+                // 1. Enviar a Google Apps Script como JSON
                 const gscriptResponse = await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    body: formData
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
                 });
                 
                 const gscriptData = await gscriptResponse.json();
@@ -479,13 +491,8 @@
                     throw new Error(gscriptData.message || 'Error al enviar a Google Sheets');
                 }
                 
-                // 2. Enviar a FormSubmit
-                const formSubmitForm = new FormData();
-                
-                // Copiar todos los campos al nuevo FormData
-                for (let pair of formData.entries()) {
-                    formSubmitForm.append(pair[0], pair[1]);
-                }
+                // 2. Enviar a FormSubmit como FormData
+                const formSubmitForm = new FormData(document.getElementById('pedidoForm'));
                 
                 await fetch(FORM_SUBMIT_URL, {
                     method: 'POST',
