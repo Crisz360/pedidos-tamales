@@ -12,36 +12,30 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'arial', sans-serif;
         }
-        #title {
+        #title{
             text-align: center;
             font-size: 2rem;
             font-weight: bold;
-            margin-bottom: 0.5rem;
         }
         .datainput {
             text-align: center;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: bold;;
         }
-        .subtitles {
+        .subtitles{
             text-align: justify;
             font-size: 1.5rem;
             font-weight: bold;
             color: #d35400;
-            margin-top: 1.5rem;
         }
         .product-card {
             transition: all 0.3s ease;
             margin-bottom: 15px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
         }
         .product-card:hover {
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transform: translateY(-2px);
         }
         .quantity-btn {
             width: 30px;
@@ -49,29 +43,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
         }
         .bank-info {
             background-color: #f8f9fa;
-            border-radius: 8px;
+            border-radius: 5px;
             padding: 15px;
             margin-top: 10px;
             display: none;
-            border: 1px solid #dee2e6;
         }
         .header {
             background-color: #d35400;
             color: white;
-            padding: 25px 0;
+            padding: 20px 0;
             margin-bottom: 30px;
             border-radius: 0 0 10px 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .btn-primary {
             background-color: #d35400;
             border-color: #d35400;
-            padding: 10px 24px;
-            font-weight: 600;
         }
         .btn-primary:hover {
             background-color: #e67e22;
@@ -89,7 +78,6 @@
             border-radius: 5px;
             cursor: pointer;
             transition: transform 0.3s;
-            border: 1px solid #ddd;
         }
         .product-img:hover {
             transform: scale(1.05);
@@ -101,14 +89,13 @@
             margin-top: 10px;
             border-radius: 5px;
             border: 1px solid #ddd;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .lightbox .lb-close {
+            top: 20px;
+            right: 20px;
         }
         .error-border {
             border: 1px solid #dc3545 !important;
-        }
-        .form-control:focus {
-            border-color: #d35400;
-            box-shadow: 0 0 0 0.25rem rgba(211, 84, 0, 0.25);
         }
         @media (max-width: 768px) {
             .product-img {
@@ -120,11 +107,8 @@
                 height: 25px;
                 font-size: 0.8rem;
             }
-            .header {
-                padding: 15px 0;
-            }
-            .subtitles {
-                font-size: 1.3rem;
+            .quantity {
+                margin: 0 5px;
             }
         }
     </style>
@@ -132,12 +116,11 @@
 <body>
     <div class="header text-center">
         <h1 id="title">¡Ordena Tus Tamales!</h1>
-        <p class="lead">Deliciosos tamales hechos a mano con ingredientes frescos</p>
+        <p class="lead">Deliciosos tamales</p>
     </div>
 
     <div class="container">
-        <form id="pedidoForm">
-            <!-- Configuración de FormSubmit -->
+        <form id="pedidoForm" action="https://formsubmit.co/esccris17@gmail.com" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="_next" value="https://Crisz360.github.io/pedidos-tamales/gracias.html">
             <input type="hidden" name="_subject" value="Nuevo pedido de tamales">
             <input type="hidden" name="_template" value="table">
@@ -148,29 +131,28 @@
             <div class="row mb-4">
                 <div class="col-md-6 mb-3">
                     <label for="nombre" class="form-label datainput">Nombre completo: <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Juan Pérez" required>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="telefono" class="form-label datainput">Teléfono: <span class="text-danger">*</span></label>
-                    <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Ej. 5512345678" required>
+                    <input type="tel" class="form-control" id="telefono" name="telefono">
                 </div>
             </div>
 
             <h3 class="mb-3 subtitles">Nuestros Tamales <span class="text-danger">*</span></h3>
-            <p class="text-muted mb-3">Selecciona al menos un tamal (Precio por pieza)</p>
+            <p class="text-muted mb-3">Selecciona al menos un tamal</p>
             
             <div class="card product-card">
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-1">
-                            <a href="https://img.chilango.com/2025/01/feria-del-tamal-2025.jpg" data-lightbox="tamal-rojo" data-title="Tamal de Salsa Roja">
-                                <img src="https://img.chilango.com/2025/01/feria-del-tamal-2025.jpg" alt="Tamal Rojo" class="product-img">
+                            <a href="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" data-lightbox="tamal-rojo" data-title="Tamal de Salsa Roja">
+                                <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" alt="Tamal Rojo" class="product-img">
                             </a>
                         </div>
                         <div class="col-md-5">
                             <h5 class="card-title">Tamal de Salsa Roja</h5>
                             <p class="card-text text-success">$26 c/u</p>
-                            <p class="card-text text-muted small">Delicioso tamal de pollo con salsa roja</p>
                         </div>
                         <div class="col-md-6">
                             <div class="d-flex align-items-center justify-content-end">
@@ -188,14 +170,13 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-1">
-                            <a href="https://img.chilango.com/2025/01/feria-del-tamal-2025.jpg" data-lightbox="tamal-verde" data-title="Tamal de Salsa Verde">
-                                <img src="https://img.chilango.com/2025/01/feria-del-tamal-2025.jpg" alt="Tamal Verde" class="product-img">
+                            <a href="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" data-lightbox="tamal-verde" data-title="Tamal de Salsa Verde">
+                                <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" alt="Tamal Verde" class="product-img">
                             </a>
                         </div>
                         <div class="col-md-5">
                             <h5 class="card-title">Tamal de Salsa Verde</h5>
                             <p class="card-text text-success">$26 c/u</p>
-                            <p class="card-text text-muted small">Tamal de pollo con salsa verde</p>
                         </div>
                         <div class="col-md-6">
                             <div class="d-flex align-items-center justify-content-end">
@@ -213,14 +194,13 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-1">
-                            <a href="https://img.chilango.com/2025/01/feria-del-tamal-2025.jpg" data-lightbox="tamal-kool" data-title="Tamal de Salsa Kool">
-                                <img src="https://img.chilango.com/2025/01/feria-del-tamal-2025.jpg" alt="Tamal Kool" class="product-img">
+                            <a href="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" data-lightbox="tamal-kool" data-title="Tamal de Salsa Kool">
+                                <img src="https://img.chilango.com/cdn-cgi/image/width=1200,quality=75,format=auto,onerror=redirect/2025/01/feria-del-tamal-2025-cdmx-monumento-a-la-revolucion.jpg" alt="Tamal Kool" class="product-img">
                             </a>
                         </div>
                         <div class="col-md-5">
                             <h5 class="card-title">Tamal de Salsa Kool</h5>
                             <p class="card-text text-success">$27 c/u</p>
-                            <p class="card-text text-muted small">Tamal especial con nuestra salsa secreta</p>
                         </div>
                         <div class="col-md-6">
                             <div class="d-flex align-items-center justify-content-end">
@@ -254,14 +234,13 @@
                 <h5>Datos Bancarios para Transferencia</h5>
                 <ul class="list-unstyled">
                     <li><strong>Banco:</strong> BBVA</li>
-                    <li><strong>Nombre:</strong> Tamales Deliciosos S.A. de C.V.</li>
-                    <li><strong>CLABE:</strong> 0123 4567 8910 1112 13</li>
+                    <li><strong>Nombre:</strong> Tamales</li>
+                    <li><strong>CLABE:</strong> 0123 4567 8910 1112</li>
                     <li><strong>Tarjeta:</strong> 4152 3134 5678 9012</li>
                 </ul>
                 <div class="mb-3">
                     <label for="comprobante" class="form-label">Subir comprobante de transferencia *</label>
-                    <input class="form-control" type="file" id="comprobante" name="comprobante" accept="image/*, .pdf" onchange="previewImage(this)">
-                    <small class="text-muted">Formatos aceptados: JPG, PNG, PDF (Máx. 5MB)</small>
+                    <input class="form-control" type="file" id="comprobante" name="comprobante" accept="image/*" onchange="previewImage(this)">
                     <img id="comprobante-preview" class="img-preview" alt="Vista previa del comprobante">
                 </div>
             </div>
@@ -273,10 +252,7 @@
             </div>
 
             <div class="d-grid gap-2 mt-4">
-                <button type="submit" class="btn btn-primary btn-lg py-3">
-                    <span id="submit-text">Enviar Pedido</span>
-                    <span id="submit-spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                </button>
+                <button type="submit" class="btn btn-primary btn-lg">Enviar Pedido</button>
             </div>
         </form>
     </div>
@@ -290,239 +266,137 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     
     <script>
-        // URL de tu Google Apps Script (reemplaza con tu URL)
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyYZ9l0QP66raqC5zo_d6moljY63ASeKTlz8stpo7oxa0LXS_cJ4cTWNtDJor3g12YaTg/exec';
-        // URL de FormSubmit
-        const FORM_SUBMIT_URL = 'https://formsubmit.co/esccris17@gmail.com';
-
-        // Configuración de Toastr
         toastr.options = {
-            closeButton: true,
-            positionClass: "toast-top-right",
-            preventDuplicates: true,
-            showDuration: 300,
-            hideDuration: 1000,
-            timeOut: 5000,
-            extendedTimeOut: 1000
+            "closeButton": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000"
         };
 
-        // Precios de los productos
-        const productPrices = {
+        const prices = {
             "tamal-rojo": 26,
             "tamal-verde": 26,
             "tamal-kool": 27
         };
-
-        // Mostrar/ocultar información bancaria según método de pago
-        $("input[name='metodo-pago']").change(function() {
-            $("#bank-info-container").toggle($("#transferencia").is(":checked"));
-        });
-
-        // Manejar incremento de cantidad
-        $(document).on('click', '.plus', function() {
-            const productId = $(this).data('product');
-            const quantityElement = $(`#${productId}-qty`);
-            const inputElement = $(`#${productId}`);
-            let currentQty = parseInt(quantityElement.text());
-            
-            currentQty++;
-            quantityElement.text(currentQty);
-            inputElement.val(currentQty);
-            updateTotal();
-        });
-
-        // Manejar decremento de cantidad
-        $(document).on('click', '.minus', function() {
-            const productId = $(this).data('product');
-            const quantityElement = $(`#${productId}-qty`);
-            const inputElement = $(`#${productId}`);
-            let currentQty = parseInt(quantityElement.text());
-            
-            if (currentQty > 0) {
-                currentQty--;
-                quantityElement.text(currentQty);
-                inputElement.val(currentQty);
-                updateTotal();
-            }
-        });
-
-        // Vista previa del comprobante
-        function previewImage(input) {
-            const preview = document.getElementById('comprobante-preview');
-            const file = input.files[0];
-            
-            if (file) {
-                // Verificar tamaño del archivo (máx 5MB)
-                if (file.size > 5 * 1024 * 1024) {
-                    toastr.error("El archivo es demasiado grande (máximo 5MB)");
-                    input.value = '';
-                    return;
-                }
-                
-                // Verificar tipo de archivo
-                const validTypes = ['image/jpeg', 'image/png', 'application/pdf'];
-                if (!validTypes.includes(file.type)) {
-                    toastr.error("Formato de archivo no válido. Use JPG, PNG o PDF");
-                    input.value = '';
-                    return;
-                }
-                
-                if (file.type.includes('image')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        preview.src = e.target.result;
-                        preview.style.display = 'block';
-                    }
-                    reader.readAsDataURL(file);
-                } else {
-                    preview.style.display = 'none';
-                }
-            }
-        }
-
-        // Actualizar el total
+        
         function updateTotal() {
             let total = 0;
             let hasSelection = false;
-
-            for (const productId in productPrices) {
-                const quantity = parseInt($(`#${productId}`).val()) || 0;
-                total += quantity * productPrices[productId];
-                if (quantity > 0) hasSelection = true;
-            }
-
+            
+            Object.keys(prices).forEach(product => {
+                const qty = parseInt($(`#${product}`).val()) || 0;
+                total += qty * prices[product];
+                if (qty > 0) hasSelection = true;
+            });
+            
             $("#total").text(`$${total}`);
             $("#total-hidden").val(total);
-
+            
             if (hasSelection) {
                 $(".product-card").removeClass("error-border");
             }
         }
-
-        // Validar y enviar el formulario
-        $("#pedidoForm").submit(async function(e) {
-            e.preventDefault();
-            
-            // Mostrar spinner de carga
-            $("#submit-text").text("Enviando...");
-            $("#submit-spinner").removeClass("d-none");
-            $("button[type='submit']").prop("disabled", true);
-            
-            let isValid = true;
-            let errorMessage = '';
-
-            // Validar datos del cliente
-            const nombre = $("#nombre").val().trim();
-            if (!nombre) {
-                errorMessage = "Por favor ingresa tu nombre completo";
-                isValid = false;
+        
+        $(".plus").click(function() {
+            const product = $(this).data("product");
+            const qtyElement = $(`#${product}-qty`);
+            const inputElement = $(`#${product}`);
+            let qty = parseInt(qtyElement.text());
+            qty++;
+            qtyElement.text(qty);
+            inputElement.val(qty);
+            updateTotal();
+        });
+        
+        $(".minus").click(function() {
+            const product = $(this).data("product");
+            const qtyElement = $(`#${product}-qty`);
+            const inputElement = $(`#${product}`);
+            let qty = parseInt(qtyElement.text());
+            if (qty > 0) {
+                qty--;
+                qtyElement.text(qty);
+                inputElement.val(qty);
+                updateTotal();
             }
-
-            const telefono = $("#telefono").val().trim();
-            if (!telefono) {
-                errorMessage = "Por favor ingresa tu número de teléfono";
-                isValid = false;
-            } else if (!/^\d{10}$/.test(telefono)) {
-                errorMessage = "El teléfono debe tener 10 dígitos";
-                isValid = false;
+        });
+        
+        $("input[name='metodo-pago']").change(function() {
+            if ($("#transferencia").is(":checked")) {
+                $("#bank-info-container").show();
+            } else {
+                $("#bank-info-container").hide();
             }
-
-            // Validar selección de productos
-            let hasProducts = false;
-            for (const productId in productPrices) {
-                if (parseInt($(`#${productId}`).val()) > 0) {
-                    hasProducts = true;
-                    break;
+        });
+        
+        function previewImage(input) {
+            const preview = document.getElementById('comprobante-preview');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
                 }
+                reader.readAsDataURL(input.files[0]);
             }
-            
-            if (!hasProducts) {
-                errorMessage = "Debes seleccionar al menos un tamal";
+        }
+        
+        $("#pedidoForm").submit(function(e) {
+            let isValid = true;
+            let hasSelection = false;
+
+            Object.keys(prices).forEach(product => {
+                const qty = parseInt($(`#${product}`).val()) || 0;
+                if (qty > 0) hasSelection = true;
+            });
+
+            if (!hasSelection) {
+                toastr.error("¡Debes seleccionar al menos un tamal!");
                 $(".product-card").addClass("error-border");
                 isValid = false;
             }
-
-            // Validar método de pago
+            
+            const nombre = $("#nombre").val().trim();
+            if (nombre === "") {
+                toastr.error("Por favor ingresa tu nombre completo");
+                isValid = false;
+            }
+            
+            const telefono = $("#telefono").val().trim();
+            if (telefono === "") {
+                toastr.error("Por favor ingresa tu número de teléfono");
+                isValid = false;
+            } else if (!/^[0-9]{10}$/.test(telefono)) {
+                toastr.error("Por favor ingresa un número de teléfono válido (10 dígitos)");
+                isValid = false;
+            }
+            
             const metodoPago = $("input[name='metodo-pago']:checked").val();
             if (!metodoPago) {
-                errorMessage = "Selecciona un método de pago";
+                toastr.error("Por favor selecciona un método de pago");
                 isValid = false;
             }
-
-            // Validar comprobante si es transferencia
+            
             if (metodoPago === "transferencia" && $("#comprobante").val() === "") {
-                errorMessage = "Debes subir el comprobante de transferencia";
+                toastr.error("¡Debes subir el comprobante de transferencia!");
                 isValid = false;
             }
-
+            
             if (!isValid) {
-                toastr.error(errorMessage);
-                $("#submit-text").text("Enviar Pedido");
-                $("#submit-spinner").addClass("d-none");
-                $("button[type='submit']").prop("disabled", false);
-                return false;
-            }
-
-            try {
-                // Crear objeto con los datos del formulario
-                const formData = {
-                    nombre: $("#nombre").val().trim(),
-                    telefono: $("#telefono").val().trim(),
-                    "tamal-rojo": $("#tamal-rojo").val(),
-                    "tamal-verde": $("#tamal-verde").val(),
-                    "tamal-kool": $("#tamal-kool").val(),
-                    total: $("#total-hidden").val(),
-                    "metodo-pago": $("input[name='metodo-pago']:checked").val(),
-                    comprobante: $("#comprobante").val() ? "SI" : "NO"
-                };
-
-                // 1. Enviar a Google Apps Script como JSON
-                const gscriptResponse = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
-                
-                const gscriptData = await gscriptResponse.json();
-                
-                if (!gscriptData.success) {
-                    throw new Error(gscriptData.message || 'Error al enviar a Google Sheets');
-                }
-                
-                // 2. Enviar a FormSubmit como FormData
-                const formSubmitForm = new FormData(document.getElementById('pedidoForm'));
-                
-                await fetch(FORM_SUBMIT_URL, {
-                    method: 'POST',
-                    body: formSubmitForm
-                });
-                
-                // Mostrar mensaje de éxito y redirigir
-                toastr.success("¡Pedido enviado correctamente! Redirigiendo...");
-                
-                setTimeout(() => {
-                    window.location.href = "https://Crisz360.github.io/pedidos-tamales/gracias.html";
-                }, 2000);
-                
-            } catch (error) {
-                console.error("Error:", error);
-                toastr.error("Error al enviar el pedido: " + (error.message || 'Por favor intenta nuevamente'));
-                
-                // Restaurar botón
-                $("#submit-text").text("Enviar Pedido");
-                $("#submit-spinner").addClass("d-none");
-                $("button[type='submit']").prop("disabled", false);
+                e.preventDefault();
+            } else {
+                toastr.success("¡Gracias por tu pedido! Estamos procesando tu solicitud.");
             }
         });
 
-        // Configuración de lightbox
         lightbox.option({
-            resizeDuration: 200,
-            wrapAround: true,
-            showImageNumberLabel: false,
-            disableScrolling: true
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'showImageNumberLabel': false,
+            'disableScrolling': true
         });
     </script>
 </body>
